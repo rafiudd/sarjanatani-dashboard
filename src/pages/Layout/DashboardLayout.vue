@@ -8,13 +8,13 @@
         <md-icon>dashboard</md-icon>
         <p>Dashboard</p>
       </sidebar-link>
+      <sidebar-link to="/table">
+        <md-icon>content_paste</md-icon>
+        <p>Statistik</p>
+      </sidebar-link>
       <sidebar-link to="/user">
         <md-icon>person</md-icon>
         <p>User Profile</p>
-      </sidebar-link>
-      <sidebar-link to="/table">
-        <md-icon>content_paste</md-icon>
-        <p>Table list</p>
       </sidebar-link>
 <!--       <sidebar-link to="/typography">
         <md-icon>library_books</md-icon>

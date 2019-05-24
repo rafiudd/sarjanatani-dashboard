@@ -6,13 +6,9 @@
     :style="sidebarStyle"
   >
     <div class="logo">
-      <a href="#" class="simple-text logo-mini">
-        <div class="logo-img">
-          <img :src="imgLogo" alt="" />
-        </div>
-      </a>
 
       <a
+        style="margin-left:20px;"
         href="https://www.creative-tim.com/product/vue-material-dashboard"
         target="_blank"
         class="simple-text logo-normal"
@@ -47,7 +43,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Vue MD"
+      default: "Sarjanatani"
     },
     backgroundImage: {
       type: String,
@@ -55,7 +51,7 @@ export default {
     },
     imgLogo: {
       type: String,
-      default: require("@/assets/img/vue-logo.png")
+      default: require("@/assets/img/1.png")
     },
     activeColor: {
       type: String,

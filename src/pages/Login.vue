@@ -1,25 +1,21 @@
 
 <template>
     <div class="login">
-        <br><br><br>
-        <h1>Masuk</h1>
-        <br>
+        <br><br>
+        <br><br>
         <div class="card-login">
-            <form @submit="login" id="dw">
+                <h1>Masuk</h1>
                 <label>Email</label><br>
-                <input type="text" name="" placeholder="Email" name="email" v-model="email" required><br><br>
+                <input type="text" placeholder="Email" name=""><br><br>
 
                 <label>Password</label><br>
-                <input type="Password" name="" placeholder="Email" name="password" v-model="password" required><br><br>
-                <a href="dashboard">
+                <input type="Password" placeholder="Email" name=""><br><br>
+                <a href="/#dashboard">
                     <button>Masuk</button> 
                 </a>
                 <a href="/dashboard"><p>Lupa Password ?</p></a>
-            </form>
         </div>   
-        <div id="weather">
-         {{getTemp}}
-        </div> <!--end of weather-->
+        <br><br>
         <br><br>
         <br><br>
         <br><br>
@@ -28,7 +24,6 @@
 </template>
 
 <script>
-
 </script>
 
 <style>
@@ -41,8 +36,9 @@
 
 h1 {
     margin-top: 0px !important;
-    text-align: center;
     font-weight: bold;
+    text-align: center;
+    padding-right: 40px !important;
     font-family: 'Source Sans Pro', sans-serif !important;
     color: #36455A !important;
     letter-spacing: 0.05em;
@@ -56,7 +52,7 @@ h1 {
 .card-login {
     padding: 60px 10px 60px 80px;
     margin:0 auto;
-    height: 400px;
+    height: 500px;
     width: 40%;
     background-color: white;
     box-shadow: 30px 30px 80px rgba(0, 0, 0, 0.5);
