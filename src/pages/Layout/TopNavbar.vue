@@ -39,7 +39,7 @@
                 </ul>
               </drop-down>
             </md-list-item> -->
-            <md-list-item>
+            <md-list-item href="#/login">
               <p style="margin-top:5px;">Logout</p>
             </md-list-item>
             <md-list-item href="#/user">
