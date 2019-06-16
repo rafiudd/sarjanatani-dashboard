@@ -4,19 +4,14 @@
       <img class="img" :src="cardUserImage" />
     </div>
 
-    <md-card-content>
-      <h6 class="category text-gray">CEO / Co-Founder</h6>
-      <h4 class="card-title">Alec Thompson</h4>
-      <p class="card-description">
-        Don't be scared of the truth because we need to restart the human
-        foundation in truth And I love you like Kanye loves Kanye I love Rick
-        Owens’ bed design but the back is...
-      </p>
-      <md-button class="md-round md-success">Follow</md-button>
+    <md-card-content v-for="(users, index) in users" :key="index">
+      <h6 class="category text-gray">{{users.name}}</h6>
+      <h4 class="card-title">{{users.name}}</h4>
     </md-card-content>
   </md-card>
 </template>
 <script>
+const axios = require('axios');
 export default {
   name: "user-card",
   props: {
@@ -26,8 +21,34 @@ export default {
     }
   },
   data() {
-    return {};
-  }
+    return {
+      users : []
+    };
+  },
+  mounted() {
+    this.getData()
+  },
+  methods : {
+        getData() {
+            let token = window.localStorage.getItem('token');
+            console.log(token)
+            axios.get("http://localhost:8000/api/user?token=" + token, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*' 
+            }
+        }).then(response => {
+                this.loading = false;
+                this.users = response.data;
+                console.log(this.users);
+            })
+            .catch(err => {
+                console.log(err);
+                console.log(token)
+            })
+        }
+    }
 };
 </script>
 <style></style>

@@ -2,34 +2,30 @@
   <form>
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">Edit Profile</h4>
+        <h4 class="title">Profile</h4>
         <p class="category">Complete your profile</p>
       </md-card-header>
 
       <md-card-content>
-        <div class="md-layout">
-          <div class="md-layout-item md-small-size-100 md-size-100">
-            <md-field>
-              <label>User Name</label>
-              <md-input v-model="username" type="text"></md-input>
+        <div class="md-layout" >
+          <div class="md-layout-item md-small-size-100 md-size-100" >
+            <md-field v-for="(users, index) in users" :key="index">
+              <label>{{users.id}}</label>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-100" >
+            <md-field v-for="(users, index) in users" :key="index">
+              <label>{{users.name}}</label>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
-            <md-field>
-              <label>Email Address</label>
-              <md-input v-model="emailadress" type="email"></md-input>
+            <md-field v-for="(users, index) in users" :key="index">
+              <label>{{users.email}}</label>            
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
-            <md-field>
-              <label>No HP</label>
-              <md-input v-model="firstname" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-100">
-            <md-field>
-              <label>Password</label>
-              <md-input v-model="lastname" type="text"></md-input>
+            <md-field  v-for="(users, index) in users" :key="index">
+              <label>{{users.no_hp}}</label>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
@@ -51,7 +47,7 @@
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-center">
-            <md-button class="md-raised md-success">Update Profile</md-button>
+            <!-- <md-button class="md-raised md-success">Update Profile</md-button> -->
           </div>
         </div>
       </md-card-content>
@@ -59,6 +55,7 @@
   </form>
 </template>
 <script>
+const axios = require('axios');
 export default {
   name: "edit-profile-form",
   props: {
@@ -69,6 +66,8 @@ export default {
   },
   data() {
     return {
+      loading: false,
+      users: [],
       username: null,
       disabled: null,
       emailadress: null,
@@ -81,7 +80,32 @@ export default {
       aboutme:
         "Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
     };
-  }
+  },
+  mounted() {
+    this.getData()
+  },
+  methods : {
+        getData() {
+            let token = window.localStorage.getItem('token');
+            console.log(token)
+            axios.get("http://localhost:8000/api/user?token=" + token, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*' 
+            }
+        }).then(response => {
+                this.loading = false;
+                this.users = response.data;
+                console.log(this.users);
+            })
+            .catch(err => {
+                console.log(err);
+                alert(err, 'Error :(', '')
+                console.log(token)
+            })
+        }
+    }
 };
 </script>
 <style></style>

@@ -1,31 +1,3 @@
-
-<template>
-    <div class="login">
-        <br><br>
-        <br><br>
-        <div class="card-login">
-                <h1>Masuk</h1>
-                <label>Email</label><br>
-                <input type="text" placeholder="Email" name=""><br><br>
-
-                <label>Password</label><br>
-                <input type="Password" placeholder="Email" name=""><br><br>
-                <a href="/#dashboard">
-                    <button>Masuk</button> 
-                </a>
-                <a href="/dashboard"><p>Lupa Password ?</p></a>
-        </div>   
-        <br><br>
-        <br><br>
-        <br><br>
-        <br><br>
-        <br>
-    </div>
-</template>
-
-<script>
-</script>
-
 <style>
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700");
 
@@ -101,3 +73,65 @@ button:hover {
     }
 }
 </style>
+<template>
+    <div class="login">
+        <br><br>
+        <br><br>
+        <div class="card-login">
+                <h1>Masuk</h1>
+                <form action="" id="loginForm">
+                <label>Email</label><br>
+                <input type="text" placeholder="Email" name="" v-model="email"><br><br>
+
+                <label>Password</label><br>
+                <input type="Password" placeholder="Password" name="" v-model="password"><br><br>
+                <a href="/#/dashboard" @click="login()">
+                    <button type="submit" @click="login()">Masuk</button> 
+                </a>
+                </form>
+                <a href="/dashboard"><p>Lupa Password ?</p></a>
+        </div>   
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br>
+    </div>
+</template>
+<script>
+    const axios = require('axios');
+    import JQuery from 'jquery'
+    var $ = JQuery
+    export default {
+    data () {
+        return {
+            email:'',
+            password:''
+        }
+    },
+    mounted() {  
+    },
+    methods : {
+        login() {
+            axios.post("http://localhost:8000/api/login", {
+                email: this.email,
+                password:this.password,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*' 
+            }
+        }).then(response => {
+                window.localStorage.setItem('token', response.data.token)
+                console.log(response.data);
+                this.$router.push('/dashboard');
+            })
+            .catch(err => {
+                console.log(err);
+                console.log(this.email,this.password);
+            })
+        }
+    }
+}
+</script>
+

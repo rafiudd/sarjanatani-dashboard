@@ -1,5 +1,8 @@
 <template>
   <div class="content">
+    <div v-for="(users, index) in users" :key="index">
+      <h3 style="margin-left:15px;margin-top:-20px;font-weight:bold;margin-bottom:20px;">Selamat Datang {{users.name}}</h3>
+    </div>
     <div class="md-layout">
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
@@ -14,9 +17,9 @@
             <h4 class="title">Suhu Tanah</h4>
             <p class="category">
               <span class="text-success"
-                ><i class="fas fa-long-arrow-alt-up"></i> 55%
+                ><i class="fas fa-long-arrow-alt-up"></i> 2%
               </span>
-              increase in today sales.
+              Peningkatan Suhu
             </p>
           </template>
 
@@ -40,14 +43,17 @@
           <template slot="content">
             <h4 class="title">Kelembaban Tanah</h4>
             <p class="category">
-              Last Campaign Performance
+              <span class="text-danger"
+                ><i class="fas fa-long-arrow-alt-down"></i> 3%
+              </span>
+              Tanah Lembab
             </p>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>access_time</md-icon>
-              campaign sent 26 minutes ago
+              updated 2 minute ago
             </div>
           </template>
         </chart-card>
@@ -57,12 +63,12 @@
       >
         <stats-card data-background-color="green">
           <template slot="header">
-            <md-icon>store</md-icon>
+            <md-icon>attach_money</md-icon>
           </template>
 
           <template slot="content">
             <p class="category">Hasil</p>
-            <h3 class="title">$34,245</h3>
+            <h3 class="title">$100</h3>
           </template>
 
           <template slot="footer">
@@ -78,21 +84,21 @@
       >
         <stats-card data-background-color="orange">
           <template slot="header">
-            <md-icon>content_copy</md-icon>
+            <md-icon>border_all</md-icon>
           </template>
 
           <template slot="content">
             <p class="category">Luas Lahan</p>
             <h3 class="title">
-              49/50
-              <small>GB</small>
+              50
+              <small>Ha</small>
             </h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
-              <md-icon class="text-danger">warning</md-icon>
-              <a href="#pablo">Get More Space...</a>
+              <md-icon>date_range</md-icon>
+              Last 14 Hours
             </div>
           </template>
         </stats-card>
@@ -102,12 +108,12 @@
       >
         <stats-card data-background-color="red">
           <template slot="header">
-            <md-icon>info_outline</md-icon>
+            <md-icon>swap_vert</md-icon>
           </template>
 
           <template slot="content">
             <p class="category">Suhu Tanah</p>
-            <h3 class="title">75</h3>
+            <h3 class="title">27&deg;	</h3>
           </template>
 
           <template slot="footer">
@@ -123,12 +129,12 @@
       >
         <stats-card data-background-color="blue">
           <template slot="header">
-            <i class="fab fa-twitter"></i>
+            <md-icon>assignment</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Suhu Air</p>
-            <h3 class="title">+245</h3>
+            <p class="category">Debit Air</p>
+            <h3 class="title">28 L</h3>
           </template>
 
           <template slot="footer">
@@ -144,6 +150,7 @@
 </template>
 
 <script>
+const axios = require('axios');
 import {
   StatsCard,
   ChartCard,
@@ -162,6 +169,7 @@ export default {
   },
   data() {
     return {
+      users : [],
       dailySalesChart: {
         data: {
           labels: ["M", "T", "W", "T", "F", "S", "S"],
@@ -247,6 +255,30 @@ export default {
         ]
       }
     };
-  }
+  },
+  mounted() {
+    this.getData()
+  },
+  methods : {
+        getData() {
+            let token = window.localStorage.getItem('token');
+            console.log(token)
+            axios.get("http://localhost:8000/api/user?token=" + token, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*' 
+            }
+        }).then(response => {
+                this.loading = false;
+                this.users = response.data;
+                console.log(this.users);
+            })
+            .catch(err => {
+                console.log(err);
+                console.log(token)
+            })
+        }
+    }
 };
 </script>

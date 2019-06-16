@@ -6,8 +6,8 @@
       >
         <md-card>
           <md-card-header data-background-color="green">
-            <h4 class="title">Simple Table</h4>
-            <p class="category">Here is a subtitle for this table</p>
+            <h4 class="title">History</h4>
+            <p class="category">Cek History Lahan Kamu</p>
           </md-card-header>
           <md-card-content>
             <simple-table table-header-color="green"></simple-table>

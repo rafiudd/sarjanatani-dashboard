@@ -10,7 +10,7 @@
       </sidebar-link>
       <sidebar-link to="/table">
         <md-icon>content_paste</md-icon>
-        <p>Statistik</p>
+        <p>History</p>
       </sidebar-link>
       <sidebar-link to="/user">
         <md-icon>person</md-icon>
