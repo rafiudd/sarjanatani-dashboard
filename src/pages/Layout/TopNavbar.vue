@@ -39,7 +39,9 @@
                 </ul>
               </drop-down>
             </md-list-item> -->
-
+            <md-list-item>
+              <p style="margin-top:5px;">Logout</p>
+            </md-list-item>
             <md-list-item href="#/user">
               <i class="material-icons">person</i>
               <p class="hidden-lg hidden-md">Profile</p>
